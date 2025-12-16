@@ -13,11 +13,12 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
+          distribution: 'temurin'  # ✅ ADD THIS LINE
       
       - name: Run Static Analysis
         run: |
           echo "=== BANK ACCOUNT CODE ANALYSIS ==="
-          echo "File: BankAccount.java (35 lines)"
+          echo "File: BankAccount.java"
           echo "Analysis Tool: Simulated SpotBugs"
           echo ""
           
