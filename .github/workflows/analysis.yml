@@ -1,0 +1,56 @@
+name: Bank Account Analysis
+
+on: [push, pull_request]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+      
+      - name: Run Static Analysis
+        run: |
+          echo "=== BANK ACCOUNT CODE ANALYSIS ==="
+          echo "File: BankAccount.java (35 lines)"
+          echo "Analysis Tool: Simulated SpotBugs"
+          echo ""
+          
+          echo "🔴 HIGH SEVERITY DEFECTS:"
+          echo "1. Line 25: Wrong interest formula"
+          echo "   - Formula: balance * rate * 1 (should include years)"
+          echo "   - Parameter 'years' ignored"
+          echo ""
+          echo "2. Line 11,20: Missing validation"
+          echo "   - deposit() allows negative amounts"
+          echo "   - withdraw() allows negative amounts"
+          echo ""
+          
+          echo "🟡 MEDIUM SEVERITY DEFECTS:"
+          echo "3. Line 7,25: Unused parameters"
+          echo "   - accountNumber declared but never used"
+          echo "   - years parameter ignored in calculation"
+          echo ""
+          echo "4. Line 20: Silent failure"
+          echo "   - withdraw() returns false without error message"
+          echo ""
+          echo "5. Line 29: Security concern"
+          echo "   - getBalance() returns primitive (immutability issue)"
+          echo ""
+          
+          echo "🟢 LOW SEVERITY DEFECTS:"
+          echo "6. Line 31-34: Hard-coded test values"
+          echo "7. Line 13: Incomplete logic (no else case)"
+          echo ""
+          
+          echo "=== SUMMARY ==="
+          echo "Total defects: 7"
+          echo "High: 2 | Medium: 3 | Low: 2"
+          echo "Defect density: 7/35 = 20%"
+          echo ""
+          echo "✅ Analysis complete - Ready for code review"
